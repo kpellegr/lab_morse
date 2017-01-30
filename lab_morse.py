@@ -70,7 +70,7 @@ FREQ = 800
 DELAY_DOT_MILLIS = 250
 DELAY_DASH_MILLIS = 1000
 
-IR_PIN = 13
+IR_PIN = 23
 
 ON_PI = False
 if sys.platform.startswith("linux"):
@@ -84,7 +84,7 @@ if ON_PI:
     try:
         import RPi.GPIO as GPIO
 
-        GPIO.setmode(GPIO.BOARD)
+        GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
         GPIO.setup(IR_PIN, GPIO.OUT)
         audio = False
@@ -99,7 +99,7 @@ else:
 def ir_beep(delay):
     GPIO.output(IR_PIN, GPIO.LOW)
     GPIO.output(IR_PIN, GPIO.HIGH)
-    sleep(delay)
+    sleep(delay/1000)
     GPIO.output(IR_PIN, GPIO.LOW)
     return
 
@@ -118,7 +118,7 @@ def emit_dash():
     if audio:
         winsound.Beep(FREQ, DELAY_DASH_MILLIS)
     if IR:
-        ir_beep(DELAY_DOT_MILLIS)
+        ir_beep(DELAY_DASH_MILLIS)
     sleep(DELAY_INTRA_SECS)
 
 def emit_blank():

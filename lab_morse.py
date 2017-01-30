@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from time import sleep
 import sys
 
@@ -140,7 +142,6 @@ def emit_character(c):
 
 # MAIN LOOP
 emitter_string = "Hello world!"
-print(sys.platform)
 
 emit_character('%') # Starting signal
 
